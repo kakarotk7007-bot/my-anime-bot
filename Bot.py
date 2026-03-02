@@ -1,102 +1,62 @@
-
 import os
 import telebot
 from telebot import types
-import requests
-import urllib.parse
 from keep_alive import keep_alive
 
-# Token fetched from Render Environment Variables
+# Token from Render Env Var
 TOKEN = os.environ.get('TOKEN')
 bot = telebot.TeleBot(TOKEN)
 
-# Your Channel Information
 CHANNEL_URL = "https://t.me/dragonballsuperbeerus"
 CHANNEL_NAME = "@dragonballsuperbeerus"
 
 keep_alive()
 
-# 1986-2026 Database
-DB_FRANCHISE = {
-    "history": (
-        "⏳ **Dragon Ball Timeline (1986 - 2026):**\n\n"
-        "• **Dragon Ball (1986):** The beginning of Goku's adventure.\n"
-        "• **Dragon Ball Z (1989):** The era of Saiyans and legendary battles.\n"
-        "• **Dragon Ball GT (1996):** The Grand Tour journey.\n"
-        "• **Dragon Ball Super (2015):** Introduction of Gods and Multiverse.\n"
-        "• **Dragon Ball Daima (2024):** A new mysterious journey.\n"
-        "• **Beerus Project (2026):** The latest saga exploring the God of Destruction's origins!"
-    ),
-    "2026": (
-        "🔥 **2026 Special Projects:**\n\n"
-        "1. **DBS: Beerus Project:** Exclusive new story about Lord Beerus.\n"
-        "2. **Galactic Era:** New Manga chapters & Anime expansion.\n"
-        "3. **Game:** Budokai Tenkaichi 5 (Sparking! Evolution).\n"
-        "4. **40th Anniversary:** Global celebration event & movie leaks."
-    ),
-    "beerus": (
-        "🟣 **DBS: Beerus Project (2026):**\n\n"
-        "यह प्रोजेक्ट बीरस के 'God of Destruction' बनने की अनसुनी कहानी बताता है। इसमें गोकू और वेजीटा बीरस के साथ मिलकर ब्रह्मांड के नए खतरों का सामना करते हैं।"
-    )
+# 🐉 Pure Dragon Ball Database (1986-2026)
+# यहाँ सिर्फ वही शब्द हैं जिनका जवाब बोट देगा
+DB_DATA = {
+    "1986": "🐉 **Dragon Ball (1986):**\nयह वह शुरुआत है जहाँ नन्हे गोकू और बुलमा पहली बार ड्रैगन बॉल्स की खोज पर निकलते हैं।",
+    "1989": "⚡ **Dragon Ball Z (1989):**\nसैयां सागा से लेकर माजिन बू तक की महान लड़ाईयाँ। इसमें गोकू पहली बार सुपर सैयां बना था।",
+    "2015": "🌌 **Dragon Ball Super (2015):**\nविनाश के देवता बीरस का आगमन और मल्टीवर्स का टूर्नामेंट।",
+    "2024": "🧒 **Dragon Ball Daima (2024):**\nएक नई कहानी जहाँ गोकू और उसके साथी फिर से छोटे हो जाते हैं।",
+    "2026": "🔥 **2026 Projects:**\n1. **Beerus Project:** बीरस की उत्पत्ति की कहानी।\n2. **Galactic Era:** नई एनीमे सीरीज।\n3. **40th Anniversary:** स्पेशल मूवी और इवेंट्स।",
+    "beerus": "🟣 **Lord Beerus:**\nयूनिवर्स 7 के विनाश के देवता। 2026 में इनका 'Beerus Project' सबसे बड़ा आकर्षण है।",
+    "goku": "⭐ **Son Goku:**\nपृथ्वी का सबसे शक्तिशाली योद्धा। 2026 में गोकू के नए 'Divine Forms' देखने को मिलेंगे।",
+    "history": "⏳ **Dragon Ball Timeline:**\n1986 ➔ 1989 ➔ 1996 (GT) ➔ 2015 ➔ 2024 ➔ 2026",
+    "vegeta": "👑 **Prince Vegeta:**\nसैयां का गौरव। अल्ट्रा ईगो और 2026 की नई ट्रेनिंग के साथ वापस आ रहा है।",
+    "broly": "🟢 **Legendary Broly:**\nअसीमित शक्ति वाला सैयां। 2026 के प्रोजेक्ट्स में ब्रोली की अहम भूमिका होगी।"
 }
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
     markup = types.InlineKeyboardMarkup()
-    btn1 = types.InlineKeyboardButton("📢 Join Main Channel", url=CHANNEL_URL)
-    btn2 = types.InlineKeyboardButton("🚀 2026 Projects", callback_data="2026_info")
-    markup.add(btn1)
-    markup.add(btn2)
+    markup.add(types.InlineKeyboardButton("📢 Join DB Channel", url=CHANNEL_URL))
     
-    welcome_msg = (
-        "👋 **Welcome to the Dragon Ball Universe (1986-2026)!**\n\n"
-        "I can give you info on any Anime or the latest 2026 projects.\n\n"
-        "**Try these keywords:**\n"
-        "• `History` - Full DB Timeline\n"
-        "• `Beerus Project` - 2026 Special\n"
-        "• `2026` - New Series & Games"
+    text = (
+        "🐉 **Welcome to the Pure Dragon Ball Universe!**\n\n"
+        "मैं सिर्फ ड्रैगन बॉल (1986-2026) का एक्सपर्ट हूँ।\n"
+        "जानकारी के लिए नीचे दिए गए शब्दों में से कोई **एक** लिखें:\n\n"
+        "• `1986`, `1989`, `2015`, `2024`, `2026`\n"
+        "• `History`, `Goku`, `Beerus`, `Vegeta`, `Broly`"
     )
-    bot.reply_to(message, welcome_msg, parse_mode="Markdown", reply_markup=markup)
+    bot.reply_to(message, text, parse_mode="Markdown", reply_markup=markup)
 
 @bot.message_handler(func=lambda message: True)
-def handle_all_messages(message):
-    query = message.text.lower()
+def handle_db_only(message):
+    # User के मैसेज को साफ करना (स्पेस हटाना और छोटे अक्षरों में करना)
+    user_input = message.text.lower().strip()
     
-    # Custom Keyword Responses
-    if "history" in query or "timeline" in query:
-        bot.reply_to(message, DB_FRANCHISE['history'])
-    elif "2026" in query:
-        bot.reply_to(message, DB_FRANCHISE['2026'])
-    elif "beerus project" in query or "beerus" in query:
-        bot.reply_to(message, DB_FRANCHISE['beerus'])
+    # अगर यूजर का इनपुट हमारे DB में है
+    if user_input in DB_DATA:
+        response = f"{DB_DATA[user_input]}\n\n🔗 {CHANNEL_NAME}"
+        bot.reply_to(message, response, parse_mode="Markdown")
     else:
-        # If not a keyword, search via Internet API
-        search_from_web(message)
-
-def search_from_web(message):
-    query_encoded = urllib.parse.quote(message.text)
-    api_url = f"https://api.jikan.moe/v4/anime?q={query_encoded}&limit=1"
-    
-    try:
-        response = requests.get(api_url).json()
-        if response.get('data') and len(response['data']) > 0:
-            anime = response['data'][0]
-            title = anime.get('title', 'N/A')
-            synopsis = anime.get('synopsis', 'No details found.')[:350] + "..."
-            img_url = anime['images']['jpg']['large_image_url']
-            
-            caption = f"🌟 **{title}**\n\n📝 **History:** {synopsis}\n\n🔗 {CHANNEL_NAME}"
-            markup = types.InlineKeyboardMarkup()
-            markup.add(types.InlineKeyboardButton("🚀 More Updates on Channel", url=CHANNEL_URL))
-            bot.send_photo(message.chat.id, img_url, caption=caption, parse_mode="Markdown", reply_markup=markup)
-        else:
-            # Not Found Message
-            error_msg = "❌ **Not Found!**\n\nTry searching for `Beerus Project` or check your spelling."
-            markup = types.InlineKeyboardMarkup()
-            markup.add(types.InlineKeyboardButton("📢 Check Channel", url=CHANNEL_URL))
-            bot.reply_to(message, error_msg, reply_markup=markup)
-    except:
-        bot.reply_to(message, "⚠️ System Busy. Try again later!")
+        # अगर यूजर कुछ और लिखता है (जैसे 'Hi', 'Naruto', या कुछ भी फालतू)
+        error_msg = (
+            "❌ **सिर्फ ड्रैगन बॉल!**\n\n"
+            "मैं और किसी चीज़ का जवाब नहीं देता। कृपया सही नाम लिखें जैसे: `Goku` या `2026`।"
+        )
+        bot.reply_to(message, error_msg)
 
 if __name__ == "__main__":
     bot.polling(none_stop=True)
