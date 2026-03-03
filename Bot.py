@@ -9,57 +9,75 @@ bot = telebot.TeleBot(TOKEN)
 CHANNEL_NAME = "@dragonballsuperbeerus"
 keep_alive()
 
-# 🖼️ फोटो गैलरी
-IMAGES = {
+# 🖼️ Posters Gallery
+POSTERS = {
     "classic": "https://m.media-amazon.com/images/M/MV5BMjI0ZGY0YjctNTE5MS00MTY2LWI1ZDYtOTM5ZWZkZGU4MTM2XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg",
-    "dbz": "https://wallpapercave.com/wp/wp6617385.jpg",
+    "dbz_kai": "https://m.media-amazon.com/images/M/MV5BMDE1MGRiNTgtZGE0Ny00ZDliLTk0N2ItYmU0NWRhY2VkY2M4XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg",
     "dbgt": "https://m.media-amazon.com/images/M/MV5BMWRiMGRhNjYtZGUxNC00ZTRjLWI0OTctY2Y0YmFmYjZkYWEyXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg",
     "dbs": "https://wallpaperaccess.com/full/1510461.jpg",
-    "movies": "https://w0.peakpx.com/wallpaper/794/410/HD-wallpaper-dragon-ball-z-movie-posters-dragon-ball-z-movies-posters.jpg",
-    "2026": "https://i.pinimg.com/736x/82/3e/2d/823e2d677610492878d655f9e2b0a395.jpg"
+    "daima": "https://m.media-amazon.com/images/M/MV5BZjY5N2VjZTAtNjA2Yi00N2VmLThhNzAtYmY3ZGRmYmFjZWRmXkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg",
+    "heroes": "https://i.pinimg.com/736x/01/75/a3/0175a3630f5b9d212711d59656209e74.jpg"
 }
 
-# 🐉 डेटाबेस आपके फॉर्मेट में
+# 🐉 डेटाबेस (आपके फोटो वाले फॉर्मेट में)
 DB_DATA = {
     "classic": (
-        "🌟 **Dragon Ball (1986)**\n\n"
+        "🌟 **Dragon Ball**\n\n"
+        "📅 **Released:** 1986–1989\n"
+        "⭐ **Rating:** 8.4/10\n"
+        "🎭 **Main Heroes:** Kid Goku, Bulma, Krillin\n\n"
         "📝 **History:** Gokuu Son is a young boy who lives in the woods all alone—that is, until a girl named Bulma runs into him in her search for a set of magical objects called the 'Dragon Balls.' Since the artifacts are said to grant one wish to whoever collects all seven, Bulma hopes to gather them and wish for a perfect boyfriend. Gokuu happens to be in possession of a 4-star ball..."
     ),
-    "dbz": (
-        "🌟 **Dragon Ball Z**\n\n"
-        "📝 **History:** Five years after the events of Dragon Ball, Gokuu is now a young adult and a father. His peaceful life is interrupted when a mysterious alien named Raditz arrives, claiming to be Gokuu's long-lost brother. He reveals that Gokuu is a member of a nearly extinct warrior race called the Saiyans..."
+    "dbz_kai": (
+        "🌟 **Dragon Ball Z Kai**\n\n"
+        "📅 **Released:** 2009–2011; 2014–2015\n"
+        "⭐ **Rating:** 8.2/10\n"
+        "🎭 **Main Heroes:** Goku, Vegeta, Gohan\n\n"
+        "📝 **History:** A remastered, faster-paced version of Dragon Ball Z with less filler, bringing it closer to the original manga. It follows adult Goku and his fight against new alien threats five years after the original series ended."
     ),
     "dbgt": (
-        "🌟 **Dragon Ball GT**\n\n"
-        "📝 **History:** Emperor Pilaf finally gets his hands on the Black Star Dragon Balls and accidentally wishes Gokuu back into a child. Gokuu, Trunks, and Pan must travel across the galaxy to find these balls and save Earth from destruction in this non-canon adventure."
+        "🌟 **Dragon Ball GT (Non-Canon)**\n\n"
+        "📅 **Released:** 1996–1997\n"
+        "⭐ **Rating:** 6.8/10\n"
+        "🎭 **Main Heroes:** SSJ4 Goku, Pan, Trunks\n\n"
+        "📝 **History:** A 64-episode series that takes place after Dragon Ball Z. After a mistake with the Black Star Dragon Balls, Goku is turned back into a child. It is considered non-canon because it was not based on Akira Toriyama's manga."
     ),
     "dbs": (
         "🌟 **Dragon Ball Super**\n\n"
-        "📝 **History:** After the defeat of Majin Buu, peace has returned to Earth. However, this peace is short-lived as Beerus, the God of Destruction, awakens from a long slumber. Gokuu must reach the level of a Super Saiyan God to protect the universe from this new threat."
+        "📅 **Released:** 2015–2018\n"
+        "⭐ **Rating:** 8.3/10\n"
+        "🎭 **Main Heroes:** Goku, Vegeta, Beerus\n\n"
+        "📝 **History:** Set after the defeat of Majin Buu, it is considered official canon. Goku encounters divine powers, gods of destruction, and enters multiversal tournaments to protect Earth."
     ),
-    "movies": (
-        "🌟 **Dragon Ball Movies Library**\n\n"
-        "📝 **History:** The franchise includes 21+ films ranging from classic adventures like 'Curse of the Blood Rubies' to modern blockbusters like 'Dragon Ball Super: Super Hero'. These movies explore alternate timelines and legendary villains like Broly and Janemba."
+    "daima": (
+        "🌟 **Dragon Ball Daima**\n\n"
+        "📅 **Released:** 2024–2025\n"
+        "⭐ **Rating:** 8.2/10\n"
+        "🎭 **Main Heroes:** Kid Goku, Glorio, Shin\n\n"
+        "📝 **History:** The newest series created to celebrate the 40th anniversary of the franchise. Due to a conspiracy, Goku and his friends are turned small and must head to the Demon Realm to fix things."
     ),
-    "2026": (
-        "🌟 **Dragon Ball 2026 (Future Projects)**\n\n"
-        "📝 **History:** As we celebrate the 40th anniversary, new projects like 'Beerus Project' and 'Galactic Era' are in development to expand the lore of the Gods and the Saiyan race beyond the known multiverse."
+    "heroes": (
+        "🌟 **Super Dragon Ball Heroes (Promo)**\n\n"
+        "📅 **Released:** 2018–2024\n"
+        "⭐ **Rating:** 7.0/10\n"
+        "🎭 **Main Heroes:** CC Goku, Xeno Goku, Fu\n\n"
+        "📝 **History:** A promotional anime series for the card game. It features non-canon 'dream battles' like Super Saiyan 4 vs. Super Saiyan Blue in various multiversal arcs."
     )
 }
 
-# 🔍 कीवर्ड मैपिंग
+# 🔍 Aliases for smart searching
 ALIASES = {
-    "dragon ball": "classic", "classic": "classic", "db": "classic",
-    "dbz": "dbz", "dragon ball z": "dbz",
+    "classic": "classic", "dragon ball": "classic",
+    "dbz kai": "dbz_kai", "kai": "dbz_kai", "dragon ball z kai": "dbz_kai",
     "gt": "dbgt", "dragon ball gt": "dbgt",
-    "dbs": "dbs", "super": "dbs", "dragon ball super": "dbs",
-    "movie": "movies", "movies": "movies", "film": "movies",
-    "2026": "2026", "future": "2026"
+    "super": "dbs", "dbs": "dbs", "dragon ball super": "dbs",
+    "daima": "daima", "dragon ball daima": "daima",
+    "heroes": "heroes", "sdbh": "heroes", "super dragon ball heroes": "heroes"
 }
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    bot.reply_to(message, "🐉 **Dragon Ball Encyclopedia**\n\nType any series name (e.g., `DBZ`, `DBS`, `Movies`) to get its history.")
+    bot.reply_to(message, "🐉 **Dragon Ball Hub Online!**\n\nकिसी भी सीरीज का नाम लिखें (जैसे: `DBZ Kai`, `Daima`, `GT`) जानकारी के लिए।")
 
 @bot.message_handler(func=lambda message: True)
 def handle_requests(message):
@@ -69,13 +87,10 @@ def handle_requests(message):
         key = ALIASES[user_input]
         bot.send_photo(
             message.chat.id, 
-            IMAGES[key], 
+            POSTERS[key], 
             caption=f"{DB_DATA[key]}\n\n🔗 {CHANNEL_NAME}",
             parse_mode="Markdown"
         )
-    else:
-        # किसी और एनीमे पर कोई जवाब नहीं (या एरर मैसेज)
-        pass 
 
 if __name__ == "__main__":
     bot.polling(none_stop=True)
