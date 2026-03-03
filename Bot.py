@@ -3,115 +3,79 @@ import telebot
 from telebot import types
 from keep_alive import keep_alive
 
-# Token and Bot Setup
 TOKEN = os.environ.get('TOKEN')
 bot = telebot.TeleBot(TOKEN)
 
 CHANNEL_NAME = "@dragonballsuperbeerus"
 keep_alive()
 
-# 🖼️ Photo Links
-POSTERS = {
+# 🖼️ फोटो गैलरी
+IMAGES = {
     "classic": "https://m.media-amazon.com/images/M/MV5BMjI0ZGY0YjctNTE5MS00MTY2LWI1ZDYtOTM5ZWZkZGU4MTM2XkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg",
     "dbz": "https://wallpapercave.com/wp/wp6617385.jpg",
+    "dbgt": "https://m.media-amazon.com/images/M/MV5BMWRiMGRhNjYtZGUxNC00ZTRjLWI0OTctY2Y0YmFmYjZkYWEyXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_.jpg",
     "dbs": "https://wallpaperaccess.com/full/1510461.jpg",
     "movies": "https://w0.peakpx.com/wallpaper/794/410/HD-wallpaper-dragon-ball-z-movie-posters-dragon-ball-z-movies-posters.jpg",
-    "future": "https://i.pinimg.com/736x/82/3e/2d/823e2d677610492878d655f9e2b0a395.jpg"
+    "2026": "https://i.pinimg.com/736x/82/3e/2d/823e2d677610492878d655f9e2b0a395.jpg"
 }
 
-# 🐉 Master Database
+# 🐉 डेटाबेस आपके फॉर्मेट में
 DB_DATA = {
     "classic": (
-        "🐉 **DRAGON BALL CLASSIC (1986-1989)**\n"
-        "⭐ **Rating:** 8.4/10\n"
-        "🎭 **Heroes:** Kid Goku, Bulma, Krillin\n\n"
-        "📜 **Full Seasons:**\n"
-        "1. Emperor Pilaf Arc\n"
-        "2. Red Ribbon Army Arc\n"
-        "3. King Piccolo Arc\n"
-        "4. Piccolo Jr. Arc\n"
-        "🦹 **Main Villain:** King Piccolo"
+        "🌟 **Dragon Ball (1986)**\n\n"
+        "📝 **History:** Gokuu Son is a young boy who lives in the woods all alone—that is, until a girl named Bulma runs into him in her search for a set of magical objects called the 'Dragon Balls.' Since the artifacts are said to grant one wish to whoever collects all seven, Bulma hopes to gather them and wish for a perfect boyfriend. Gokuu happens to be in possession of a 4-star ball..."
     ),
     "dbz": (
-        "⚡ **DRAGON BALL Z (1989-1996)**\n"
-        "⭐ **Rating:** 8.8/10\n"
-        "🎭 **Heroes:** Goku, Vegeta, Gohan, Piccolo\n\n"
-        "📜 **Full Seasons:**\n"
-        "1. Saiyan Saaga (Vegeta)\n"
-        "2. Frieza Saaga (Frieza)\n"
-        "3. Cell Saaga (Cell)\n"
-        "4. Majin Buu Saaga (Kid Buu)\n"
-        "🦹 **Iconic Villain:** Frieza"
+        "🌟 **Dragon Ball Z**\n\n"
+        "📝 **History:** Five years after the events of Dragon Ball, Gokuu is now a young adult and a father. His peaceful life is interrupted when a mysterious alien named Raditz arrives, claiming to be Gokuu's long-lost brother. He reveals that Gokuu is a member of a nearly extinct warrior race called the Saiyans..."
+    ),
+    "dbgt": (
+        "🌟 **Dragon Ball GT**\n\n"
+        "📝 **History:** Emperor Pilaf finally gets his hands on the Black Star Dragon Balls and accidentally wishes Gokuu back into a child. Gokuu, Trunks, and Pan must travel across the galaxy to find these balls and save Earth from destruction in this non-canon adventure."
     ),
     "dbs": (
-        "🌌 **DRAGON BALL SUPER (2015-2018)**\n"
-        "⭐ **Rating:** 8.3/10\n"
-        "🎭 **Heroes:** Goku, Vegeta, Beerus, Whis\n\n"
-        "📜 **Full Arcs:**\n"
-        "1. Battle of Gods (Beerus)\n"
-        "2. Goku Black Arc (Zamasu)\n"
-        "3. Tournament of Power (Jiren)\n"
-        "4. Moro Arc (Manga Only)\n"
-        "🦹 **Strongest Opponent:** Jiren"
+        "🌟 **Dragon Ball Super**\n\n"
+        "📝 **History:** After the defeat of Majin Buu, peace has returned to Earth. However, this peace is short-lived as Beerus, the God of Destruction, awakens from a long slumber. Gokuu must reach the level of a Super Saiyan God to protect the universe from this new threat."
     ),
     "movies": (
-        "🎬 **DRAGON BALL MOVIES LIST**\n"
-        "⭐ **Overall Rating:** 7.5/10\n\n"
-        "📜 **Top Movies & Villains:**\n"
-        "• Fusion Reborn (Janemba)\n"
-        "• Broly: The Legendary Saiyan\n"
-        "• DBS: Broly (Golden Frieza)\n"
-        "• DBS: Super Hero (Cell Max)\n"
-        "• **2026 Special:** 40th Anniversary Movie"
+        "🌟 **Dragon Ball Movies Library**\n\n"
+        "📝 **History:** The franchise includes 21+ films ranging from classic adventures like 'Curse of the Blood Rubies' to modern blockbusters like 'Dragon Ball Super: Super Hero'. These movies explore alternate timelines and legendary villains like Broly and Janemba."
     ),
     "2026": (
-        "🔥 **PROJECT 2026 & FUTURE**\n"
-        "1. **Beerus Project:** विनाश के देवता की अनसुनी कहानी।\n"
-        "2. **Galactic Era:** नई एनीमे सीरीज।\n"
-        "3. **Goku New Form:** 2026 के स्पेशल प्रोजेक्ट में नए अवतार।"
+        "🌟 **Dragon Ball 2026 (Future Projects)**\n\n"
+        "📝 **History:** As we celebrate the 40th anniversary, new projects like 'Beerus Project' and 'Galactic Era' are in development to expand the lore of the Gods and the Saiyan race beyond the known multiverse."
     )
 }
 
-# Mapping keywords to specific data
+# 🔍 कीवर्ड मैपिंग
 ALIASES = {
-    "classic": "classic", "dragon ball": "classic", "db": "classic",
+    "dragon ball": "classic", "classic": "classic", "db": "classic",
     "dbz": "dbz", "dragon ball z": "dbz",
-    "dbs": "dbs", "dragon ball super": "dbs",
+    "gt": "dbgt", "dragon ball gt": "dbgt",
+    "dbs": "dbs", "super": "dbs", "dragon ball super": "dbs",
     "movie": "movies", "movies": "movies", "film": "movies",
     "2026": "2026", "future": "2026"
 }
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    text = (
-        "🐉 **Dragon Ball Encyclopedia (1986-2026)**\n\n"
-        "जानकारी के लिए नीचे दिए गए नाम लिखें:\n"
-        "• `Classic` (Dragon Ball 1986)\n"
-        "• `DBZ` (Dragon Ball Z)\n"
-        "• `DBS` (Dragon Ball Super)\n"
-        "• `Movies` (All Films)\n"
-        "• `2026` (Upcoming Projects)"
-    )
-    bot.reply_to(message, text, parse_mode="Markdown")
+    bot.reply_to(message, "🐉 **Dragon Ball Encyclopedia**\n\nType any series name (e.g., `DBZ`, `DBS`, `Movies`) to get its history.")
 
 @bot.message_handler(func=lambda message: True)
-def handle_all_requests(message):
+def handle_requests(message):
     user_input = message.text.lower().strip()
     
-    # Check if keyword exists in our dictionary
     if user_input in ALIASES:
         key = ALIASES[user_input]
-        poster_url = POSTERS.get(key, POSTERS["classic"])
-        
         bot.send_photo(
             message.chat.id, 
-            poster_url, 
+            IMAGES[key], 
             caption=f"{DB_DATA[key]}\n\n🔗 {CHANNEL_NAME}",
             parse_mode="Markdown"
         )
     else:
-        # Strict Block for other topics
-        bot.reply_to(message, "❌ **सिर्फ ड्रैगन बॉल!**\nलिखें: `Classic`, `DBZ`, `DBS`, `Movies` या `2026`।")
+        # किसी और एनीमे पर कोई जवाब नहीं (या एरर मैसेज)
+        pass 
 
 if __name__ == "__main__":
     bot.polling(none_stop=True)
